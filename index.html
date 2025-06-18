@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>메인 페이지</title>
+    <title>공룡 게임</title>
     <style>
         body {
             display: flex;
@@ -11,14 +11,62 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            background-color: #f7f7f7;
             font-family: Arial, sans-serif;
         }
-        h1 {
-            font-size: 2em;
+        canvas {
+            border: 1px solid #000;
         }
     </style>
 </head>
 <body>
-    <h1>홍찬영님 안녕하세요</h1>
-</body>
-</html>
+    <canvas id="gameCanvas" width="800" height="200"></canvas>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let dino = { x: 50, y: 150, width: 50, height: 50, dy: 0, gravity: 0.5, jumpPower: -10 };
+        let obstacles = [];
+        let score = 0;
+        let gameOver = false;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' && dino.y === 150) {
+                dino.dy = dino.jumpPower;
+            }
+        });
+
+        function update() {
+            if (gameOver) return;
+
+            dino.dy += dino.gravity;
+            dino.y += dino.dy;
+            if (dino.y > 150) {
+                dino.y = 150;
+                dino.dy = 0;
+            }
+
+            if (Math.random() < 0.01) {
+                obstacles.push({ x: 800, y: 150, width: 20, height: 50 });
+            }
+
+            obstacles.forEach((obstacle, index) => {
+                obstacle.x -= 5;
+                if (obstacle.x + obstacle.width < 0) {
+                    obstacles.splice(index, 1);
+                    score++;
+                }
+
+                if (dino.x < obstacle.x + obstacle.width &&
+                    dino.x + dino.width > obstacle.x &&
+                    dino.y < obstacle.y + obstacle.height &&
+                    dino.y + dino.height > obstacle.y) {
+                    gameOver = true;
+                }
+            });
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'black';
+            ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
+
+           
