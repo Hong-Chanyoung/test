@@ -69,4 +69,17 @@
             ctx.fillStyle = 'black';
             ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
 
-           
+            obstacles.forEach(obstacle => {
+                ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+            });
+
+            ctx.font = '20px Arial';
+            ctx.fillText(`Score: ${score}`, 10, 20);
+
+            requestAnimationFrame(update);
+        }
+
+        update();
+    </script>
+</body>
+</html>
