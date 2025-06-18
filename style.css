@@ -1,41 +1,56 @@
-/* 싸이월드 느낌의 레트로 배경 */
-body, html {
+body {
   margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  font-family: 'Courier New', Courier, monospace;
-  background: linear-gradient(135deg, #fcd3e1 25%, #ffe7f0 100%);
-  position: relative;
+  background-color: #121212;
+  color: #e0ffe0;
+  font-family: 'Helvetica Neue', sans-serif;
 }
 
-.background {
-  background: url('https://i.imgur.com/kcKZeIp.png'); /* 도트 패턴 느낌 */
-  opacity: 0.15;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
+header {
+  background-color: #1c3b2b;
+  padding: 20px;
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  color: #aef3ae;
 }
 
-/* 가운데 도트 텍스트 */
-.dot-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 100px;
-  letter-spacing: 10px;
-  color: #000;
-  z-index: 1;
+.book-row {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  cursor: pointer;
+  overflow-x: auto;
+  padding: 20px;
+  gap: 15px;
 }
 
-.dot-text span {
-  display: inline-block;
-  transition: transform 0.3s, opacity 0.3s;
+.book-card {
+  min-width: 200px;
+  background-color: #1c1c1c;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(80, 255, 120, 0.2);
+  transition: transform 0.3s;
+}
+
+.book-card:hover {
+  transform: scale(1.05);
+}
+
+.book-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.book-card .info {
+  padding: 10px;
+}
+
+.book-card .title {
+  font-size: 1em;
+  font-weight: bold;
+  color: #c2f0c2;
+}
+
+.book-card .author {
+  font-size: 0.9em;
+  color: #88cc88;
 }
